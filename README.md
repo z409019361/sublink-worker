@@ -1,114 +1,88 @@
 <div align="center">
+  <img src="public/favicon.png" alt="Sublink Worker" width="120" height="120"/>
+
   <h1><b>Sublink Worker</b></h1>
-  <h5><i>Serverless 自部署订阅转换工具最佳实践</i></h5>
-  
+  <h5><i>One Worker, All Subscriptions</i></h5>
+
+  <p><b>A lightweight subscription converter and manager for proxy protocols, deployable on Cloudflare Workers, Vercel, Node.js, or Docker.</b></p>
+
   <a href="https://trendshift.io/repositories/12291" target="_blank">
     <img src="https://trendshift.io/api/badge/repositories/12291" alt="7Sageer%2Fsublink-worker | Trendshift" width="250" height="55"/>
   </a>
-  
-  <!-- <p>
-    <a href="https://sublink-worker.sageer.me">https://sublink-worker.sageer.me</a>
-  </p> -->
+
   <br>
 
+<p style="display: flex; align-items: center; gap: 10px;">
+  <a href="https://deploy.workers.cloudflare.com/?url=https://github.com/7Sageer/sublink-worker">
+    <img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Workers" style="height: 32px;"/>
+  </a>
+  <a href="https://vercel.com/new/clone?repository-url=https://github.com/7Sageer/sublink-worker&env=KV_REST_API_URL,KV_REST_API_TOKEN&envDescription=Vercel%20KV%20credentials%20for%20data%20storage&envLink=https://vercel.com/docs/storage/vercel-kv">
+    <img src="https://vercel.com/button" alt="Deploy to Vercel" style="height: 32px;"/>
+  </a>
+</p>
+
+  <h3>📚 Documentation</h3>
   <p>
-    <a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages/create">
-      <img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Workers"/>
-    </a>
+    <a href="https://app.sublink.works"><b>⚡ Live Demo</b></a> ·
+    <a href="https://sublink.works/en/"><b>Documentation</b></a> 
+    <a href="https://sublink.works"><b>中文文档</b></a>·
+  </p>
+  <p>
+    <a href="https://sublink.works/guide/quick-start/">Quick Start</a> ·
+    <a href="https://sublink.works/api/">API Reference</a> ·
+    <a href="https://sublink.works/guide/faq/">FAQ</a>
   </p>
 </div>
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 快速部署
-- Fork本项目，点击上方`Deploy to Cloudflare`按钮
-- 在`导入储存库`栏选择你的仓库（你需要绑定Github账户）
-- 更改`部署命令`如下，选择`保存并部署`即可使用
-``` bash
-npm run deploy
-```
+### One-Click Deployment
+- Choose a "deploy" button above to click
+- That's it! See the [Document](https://sublink.works/guide/quick-start/) for more information.
 
-## ✨ 功能特点
+### Alternative Runtimes
+- **Node.js**: `npm run build:node && node dist/node-server.cjs`
+- **Vercel**: `vercel deploy` (configure KV in project settings)
+- **Docker**: `docker pull ghcr.io/7sageer/sublink-worker:latest`
+- **Docker Compose**: `docker compose up -d` (includes Redis)
 
-### 支持协议
-- ShadowSocks
-- VMess
-- VLESS
-- Hysteria2
-- Trojan
-- TUIC
+## ✨ Features
 
-### 核心功能
-- 支持导入 Base64 的 http/https 订阅链接以及多种协议的分享URL
-- 纯JavaScript + Cloudflare Worker实现，一键部署，开箱即用
-- 支持固定/随机短链接生成（基于 KV）
-- 浅色/深色主题切换
-- 灵活的 API，支持脚本化操作
-- 中文，英语，波斯语三语言支持
+### Supported Protocols
+ShadowSocks • VMess • VLESS • Hysteria2 • Trojan • TUIC
 
-### 客户端支持
-- Sing-Box
-- Clash
-- Xray/V2Ray
+### Client Support
+Sing-Box • Clash • Xray/V2Ray • Surge
 
-### Web 界面特性
-- 用户友好的操作界面
-- 提供多种预定义规则集
-- 可自建关于 geo-site、geo-ip、ip-cidr 和 domain-suffix 的自定义策略组
+### Input Support
+- Base64 subscriptions
+- HTTP/HTTPS subscriptions
+- Full configs (Sing-Box JSON, Clash YAML, Surge INI)
 
-## 📖 API 文档
+### Core Capabilities
+- Import subscriptions from multiple sources
+- Generate fixed/random short links (KV-based)
+- Light/Dark theme toggle
+- Flexible API for script automation
+- Multi-language support (Chinese, English, Persian, Russian)
+- Web interface with predefined rule sets and customizable policy groups
 
-详细的 API 文档请参考 [APIDoc.md](/docs/APIDoc.md)
+## 🤝 Contributing
 
-### 主要端点
-- `/singbox` - 生成 Sing-Box 配置
-- `/clash` - 生成 Clash 配置
-- `/xray` - 生成 Xray 配置
-- `/shorten` - 生成短链接
+Issues and Pull Requests are welcome to improve this project.
 
-## 📝 最近更新
+## 📄 License
 
-### 2025-04-30
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-- 完全适配Sing-Box 1.11
-- 出于Github最近的限制，Balance规则集添加了`Github`
+## ⚠️ Disclaimer
 
-## 🔧 项目结构
+This project is for learning and exchange purposes only. Please do not use it for illegal purposes. All consequences resulting from the use of this project are solely the responsibility of the user and are not related to the developer.
 
-```
-.
-├── index.js                 # 主要的服务器逻辑，处理请求路由
-├── BaseConfigBuilder.js     # 构建基础配置
-├── SingboxConfigBuilder.js  # 构建 Sing-Box 配置
-├── ClashConfigBuilder.js    # 构建 Clash 配置
-├── ProxyParsers.js         # 解析各种代理协议的 URL
-├── utils.js                # 提供各种实用函数
-├── htmlBuilder.js          # 生成 Web 界面
-├── style.js               # 生成 Web 界面的 CSS
-├── config.js              # 保存配置信息
-└── docs/
-    ├── APIDoc.md         # API 文档
-    ├── UpdateLogs.md      # 更新日志
-    ├── FAQ.md             # 常见问题解答
-    └── BaseConfig.md      # 基础配置功能介绍
-```
-
-## 🤝 贡献
-
-欢迎提交 Issues 和 Pull Requests 来改进这个项目。
-
-## 📄 许可证
-
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
-
-## ⚠️ 免责声明
-
-本项目仅供学习交流使用，请勿用于非法用途。使用本项目所造成的一切后果由使用者自行承担，与开发者无关。
-
-## 💰 赞助
+## 💰 Sponsorship
 
 <div align="center">
-  <h3>感谢以下赞助商对本项目的支持</h3>
+  <h3>Thanks to the following sponsors for their support of this project</h3>
 <table border="0">
   <tr>
     <td>
@@ -123,13 +97,12 @@ npm run deploy
     </td>
   </tr>
 </table>
-  <p><b>NodeSupport赞助了本项目，感谢他们的支持！</b></p>
-  <p>如果您想赞助本项目，请联系开发者 <a href="https://github.com/7Sageer" style="text-decoration: none;">@7Sageer</a></p>
+  <p>If you would like to sponsor this project, please contact the developer <a href="https://github.com/7Sageer" style="text-decoration: none;">@7Sageer</a></p>
 </div>
 
 ## ⭐ Star History
 
-感谢所有为本项目点亮 Star 的朋友们！🌟
+Thanks to everyone who has starred this project! 🌟
 
 <a href="https://star-history.com/#7Sageer/sublink-worker&Date">
  <picture>
